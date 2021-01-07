@@ -21,7 +21,7 @@ int temp;
 void setup() {
   size(1800, 1024);
   position = new IntList();
-  frameRate(120);
+  frameRate(30);
   drawStuff();
   rectColor = color(0);
   rectHighlight = color(51);
@@ -57,15 +57,18 @@ void draw() {
   if(prevY<=500 && sensorValue>500){
     stroke(0,0,255);
     drawArrow(frameCount,500,50,90);
-    if(!flag){
-      position.append(frameCount);
-      if(position.size()==2){
-        
-      }
+    
+    position.append(frameCount);
+    if(position.size()==2){
+      fill(255,255,255);
+      rect(750,40,250,100);
+      fill(255,0,0);
+      String a = "period is "+nf(float(position.get(1)-position.get(0))/30,1,2)+"s";
+      println(float(position.get(1)-position.get(0))/30);
+      text(a,800,100);
+      position.clear();
     }
-    else{
-      position.append(frameCount);
-    }
+
     stroke(255,0,0);
   }else if (prevY>=500 && sensorValue<500){
     stroke(0,0,255);
